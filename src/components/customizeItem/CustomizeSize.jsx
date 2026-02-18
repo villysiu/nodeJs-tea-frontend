@@ -22,7 +22,7 @@ const CustomizeSize = ({size, setSize}) => {
                             onChange={()=>setSize(sz)}
                             inline
                             type="radio"
-                            defaultChecked = {size!==null && sz._id===size.id}
+                            defaultChecked = {size!==null && sz._id===size._id}
                             name="size"
                             label={labelText}
                             id={`size-radio-${sz._id}`}

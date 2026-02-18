@@ -6,7 +6,7 @@ import CustomizeTemperature from './CustomizeTemperature'
 import CustomizeMilk from './CustomizeMilk'
 import CustomizeSugar from './CustomizeSugar'
 import Quantity from './Quantity'
-
+import AddCartButton from './AddCartButton'
 import {Modal, Button} from 'react-bootstrap'
 
 const CustomizeItemModal = ({handleClose, item}) => {
@@ -16,11 +16,9 @@ const CustomizeItemModal = ({handleClose, item}) => {
 
     // const [menuitem, setMenuitem] = useState(item.menuitem)
     const [temperature, setTemperature] = useState(item.temperature ) 
-    const [size, setSize] =useState(item.size || null)
+    const [size, setSize] =useState(item.size)
     const [milk, setMilk] = useState(item.milk)
-
     const [sugar, setSugar] = useState(item.sugar)
-
     const [quantity, setQuantity] = useState(1)
 
     
@@ -39,50 +37,28 @@ const CustomizeItemModal = ({handleClose, item}) => {
                     <CustomizeSugar sugar={sugar} setSugar={setSugar} />
                 </Modal.Body>
 
-
                 <Modal.Footer>
-  <Quantity quantity={quantity} setQuantity={setQuantity} />
-  <Button className="ms-auto">
-    Add to cart
-  </Button>
+                    <Quantity quantity={quantity} setQuantity={setQuantity} />
+                    <AddCartButton 
+                        handleClose={handleClose} 
+                        item={{
+                            menuitem: {
+                                _id: item._id,
+                                title: item.title,
+                                price: item.price
+                            },
 
-                {/*     {
-                        itemToCustomize.id === null ?
-                            <AddCartButton
-                                customizedItem={{
-                                    'menuitem': itemToCustomize.menuitem,
-                                    'quantity': quantity,
-                                    'temperature': temperature,
-                                    'sugar': sugar,
-                                    'size': size,
-                                    'milk': milk
-                                }}
-                                handleHide={handleHide} 
-                            />
-                            :
-                            <UpdateCartButton
-                                customizedItem={{
-                                    'id':itemToCustomize.id,
-                                    'menuitem': itemToCustomize.menuitem,
-                                    'quantity': quantity,
-                                    'temperature': temperature,
-                                    'sugar': sugar,
-                                    'size': size,
-                                    'milk': milk
-                                }}
-                                handleHide={handleHide}
-                            />
+                            temperature: temperature,
+                            size: size,
+                            milk: milk,
+                            sugar: sugar,
+                            quantity: quantity
+                        }} />
 
-
-                    }
-*/}
                             
             
                 </Modal.Footer> 
-                
             </Modal>
-
-    )
-}
-
+        )
+    }
 export default CustomizeItemModal

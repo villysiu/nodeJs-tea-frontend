@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 const CustomizeMilk = ({milk, setMilk}) => {
     const { milks } = useMenu();
 
-    console.log(milk)
+    console.log(milks)
     if(milk.title === 'NA')
         return null
 
@@ -20,6 +20,8 @@ const CustomizeMilk = ({milk, setMilk}) => {
                     if(mk.title === 'NA') return null
                     const price = mk.price > 0 ? `+$${mk.price}` : ""
                     const mkTitle = `${mk.title}  ${price}`
+  
+    
                     return(
                         
                         <Form.Check key={mk._id}
@@ -27,7 +29,7 @@ const CustomizeMilk = ({milk, setMilk}) => {
                             onChange={()=>setMilk(mk)}
                             inline
                             type="radio"
-                            defaultChecked = {milk.id=== mk._id}
+                            defaultChecked = {milk._id===mk._id}
                             name="milk"
                             label={mkTitle}
                             id={`milk-radio-${mk._id}`}
