@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useAlert } from "../context/AlertContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Form, Button, Spinner } from "react-bootstrap";
 import EmailInput from "./EmailInput";
@@ -19,10 +20,11 @@ const Login = () => {
 
     const [loading, setLoading] = useState(false)
 
+    const {showAlert} = useAlert();
+
     const handleSubmit = async(e) =>{
         e.preventDefault();
         setLoading(true);
-
             
         try {
             const response = await fetch('http://localhost:3000/api/v1/auth/login', {
@@ -39,18 +41,17 @@ const Login = () => {
 
             })
 
-            if(!response.ok) {
-                const errorText = await response.text();
-                console.log("Error :", errorText);
-                return
+            const data = await response.json();
+            if(!response.ok) {            
+                throw new Error(data.msg);
             }
 
-            const data = await response.json()
 
             // load data
             login(data.user)
             localStorage.setItem("token", data.token)
 
+            showAlert(`Welcom back, ${data.user.name}`, 'success') 
             const from = location.state?.from?.pathname || "/";
             navigate(from, { replace: true });
 
@@ -59,7 +60,7 @@ const Login = () => {
         }
         catch(error){
             console.error(error);
-            // setEmailError("Login failed. Please check your credentials.");
+            showAlert(error.message, 'danger')
         } 
         finally {
             setLoading(false);
