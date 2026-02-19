@@ -75,5 +75,9 @@
     width: 100%;
     padding: 1rem;
     box-shadow: none;
-
   }
+}
+
+#user-dropdown::after {
+  display: none;
+}

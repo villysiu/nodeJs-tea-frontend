@@ -1,15 +1,18 @@
+import React from 'react'
 import { Routes, Route } from "react-router-dom"
-import "./App.css"
 
 import Home from "./components/Home"
 import Menuitem from "./components/Menuitem"
 import Login from './components/auth/Login'
 import Profile from './components/user/Profile'
 // import Order from "./components/Order"
-import NavigationBar from "./components/Navbar"
+import NavigationBar from "./components/navbar/Navbar"
 import ProtectedRoute from "./components/ProtectedRoute"
 
+
 function App() {
+
+  
   return (
     <>
       <NavigationBar />

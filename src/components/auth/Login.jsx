@@ -19,8 +19,6 @@ const Login = () => {
 
     const [loading, setLoading] = useState(false)
 
-
-
     const handleSubmit = async(e) =>{
         e.preventDefault();
         setLoading(true);
@@ -48,8 +46,6 @@ const Login = () => {
             }
 
             const data = await response.json()
-
-            
 
             // load data
             login(data.user)
