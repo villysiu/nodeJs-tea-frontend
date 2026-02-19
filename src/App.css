@@ -59,3 +59,21 @@
   /* border: var(--border-color) 1px solid; */
   box-shadow: 0 0 5px var(--border-color) !important;
 }
+
+.login-frame {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 672px;
+  align-items: left;
+  /* center all children horizontally */
+  /* text-align: center; */
+}
+
+@media (max-width: 768px) {
+  .login-frame {
+    width: 100%;
+    padding: 1rem;
+    box-shadow: none;
+
+  }
