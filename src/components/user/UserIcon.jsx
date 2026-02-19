@@ -32,11 +32,11 @@ const UserIcon = () => {
                 <NavDropdown.Item as={Link} to="/orders">
                     orders
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/secret">
+                <NavDropdown.Item as={Link} to="/profile">
                     Profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>
+                <NavDropdown.Item as={Link} to="/logout" onClick={handleLogout}>
                     Logout
                 </NavDropdown.Item>
             </NavDropdown>
