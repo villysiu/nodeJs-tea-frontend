@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Container, Card, Row, Col, Button, Spinner, Alert } from "react-bootstrap"
-import { useMenu } from "./MenuContext";
+import { useMenu } from "./context/MenuContext";
 import { PlusCircleFill } from "react-bootstrap-icons"
 import CustomizeItemModal  from './customizeItem/CustomizeItemModal'
 

@@ -50,13 +50,13 @@ export const MenuProvider = ({ children }) => {
 
     return (
         <MenuContext.Provider
-        value={{
-            menuitems,
-            milks,
-            sizes,
-            temperatures,
-            sugars,
-            loading,
+            value={{
+                menuitems,
+                milks,
+                sizes,
+                temperatures,
+                sugars,
+                loading,
         }}
         >
         {children}

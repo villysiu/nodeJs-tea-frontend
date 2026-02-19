@@ -1,4 +1,4 @@
-import { useMenu } from "../MenuContext";
+import { useMenu } from "../context/MenuContext";
 import { Form } from 'react-bootstrap'
 
 const CustomizeSugar = ({sugar, setSuga}) => {

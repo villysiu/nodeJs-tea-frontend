@@ -1,4 +1,3 @@
-// import { useMenu } from "./MenuContext";
 import { useState, useDispatch } from 'react'
 
 import CustomizeSize from './CustomizeSize'
