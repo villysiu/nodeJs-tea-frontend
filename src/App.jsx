@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Routes, Route } from "react-router-dom"
 
 import Home from "./components/Home"
@@ -7,22 +8,30 @@ import Login from './components/auth/Login'
 import Profile from './components/user/Profile'
 // import Order from "./components/Order"
 import NavigationBar from "./components/navbar/Navbar"
+import AlertBar from "./components/navbar/AlertBar"
 import ProtectedRoute from "./components/ProtectedRoute"
+import RedirectIfAuth from "./components/routes/RedirectIfAuth"
 
 
 function App() {
 
-  
   return (
     <>
       <NavigationBar />
+      <AlertBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menuitem />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" 
+          element={
+            <RedirectIfAuth>
+              <Login />
+            </RedirectIfAuth>
+          } 
+        />
         {/* <Route path="/signup" element={<Signup />} /> */}
         <Route
-          path="/secret" 
+          path="/profile" 
           element={
             <ProtectedRoute>
               <Profile />
