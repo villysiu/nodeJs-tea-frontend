@@ -5,14 +5,17 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Form, Button, Spinner } from "react-bootstrap";
 import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
+import NameInput from "./NameInput";
 
 
-const Login = () => {
+const Signup = () => {
 
     const { login } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [name, setName] = useState('')
+    const [nameError, setNameError] = useState('')
     const [email, setEmail] = useState("")
     const [emailError, setEmailError] = useState("")
     const [password, setPassword] = useState("")
@@ -27,7 +30,7 @@ const Login = () => {
         setLoading(true);
             
         try {
-            const response = await fetch('http://localhost:3000/api/v1/auth/login', {
+            const response = await fetch('http://localhost:3000/api/v1/auth/register', {
                 'method': "POST",
                 'headers': {
                     'content-type': 'application/json',
@@ -35,6 +38,7 @@ const Login = () => {
 
                 },
                 'body': JSON.stringify({
+                    "name": name,
                     "email": email,
                     "password": password
                 }),
@@ -46,13 +50,12 @@ const Login = () => {
                 throw new Error(data.msg);
             }
 
-
             // load data
             login(data.user)
             localStorage.setItem("token", data.token)
 
-            showAlert(`Welcom back, ${data.user.name}`, 'success') 
-            const from = location.state?.from?.pathname || "/profile";
+            showAlert(`Welcome, ${data.user.name}`, 'success') 
+            const from = location.state?.from?.pathname || "/";
             navigate(from, { replace: true });
 
             setEmail('');
@@ -69,22 +72,32 @@ const Login = () => {
 
 
     return(
-        <div className='login-wrapper'>
-        <div className='login-frame'>
+        <div className='signup-wrapper'>
+        <div className='signup-frame'>
 
-            <h3 className="mb-4">Sign in to your account</h3>
+            <h3 className="mb-4">Sign up a new account</h3>
             <Form onSubmit={handleSubmit} style={{ width: '100%'}}>
-
+                <NameInput name={name} setName={setName} nameError={nameError} setNameError={setNameError}/>
                 <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
                 <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
-                <Button type="submit" disabled={ loading || emailError!=="" || passwordError!=="" || email==="" || password==="" }>
-                    {loading? <Spinner size="sm"/> : "Sign In" }
+                <Button type="submit" 
+                        disabled={ loading || 
+                                   emailError!=="" || 
+                                   passwordError!=="" || 
+                                   email==="" || 
+                                   password==="" || 
+                                   name==="" || 
+                                   nameError!==""
+                                }
+                >
+                    {loading? <Spinner size="sm"/> : "Sign Up" }
                 </Button>
 
             </Form>
             <div>Forgot your password?</div>
-            <Link to={`/signup`} state={{ from: location.state?.from}}>
-                Create an account
+            <Link to={`/login`}>
+
+                Sign in to your account
 
             </Link>
         </div>
@@ -93,6 +106,6 @@ const Login = () => {
 
     )
 }
-export default Login
+export default Signup
 
 

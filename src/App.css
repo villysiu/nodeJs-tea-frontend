@@ -60,18 +60,29 @@
   box-shadow: 0 0 5px var(--border-color) !important;
 }
 
-.login-frame {
+.login-frame,
+.signup-frame {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: 672px;
-  align-items: left;
+  width: 480px;
+  align-items: flex-start;
   /* center all children horizontally */
   /* text-align: center; */
 }
 
-@media (max-width: 768px) {
-  .login-frame {
+.login-wrapper,
+.signup-wrapper {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+
+  .login-frame,
+  .signup-frame {
     width: 100%;
     padding: 1rem;
     box-shadow: none;
