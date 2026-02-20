@@ -7,14 +7,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { MenuProvider } from './components/context/MenuContext'
 import { AuthProvider } from './components/context/AuthContext'
 import { AlertProvider } from './components/context/AlertContext'
+import { CartProvider } from './components/context/CartContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <AlertProvider>
       <AuthProvider>
-        <MenuProvider>
-          <App />
-        </MenuProvider>
+        <CartProvider>
+          <MenuProvider>
+            <App />
+          </MenuProvider>
+        </CartProvider>``
       </AuthProvider>
     </AlertProvider>
   </BrowserRouter>
