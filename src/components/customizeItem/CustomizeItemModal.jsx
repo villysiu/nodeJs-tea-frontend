@@ -6,19 +6,36 @@ import CustomizeMilk from './CustomizeMilk'
 import CustomizeSugar from './CustomizeSugar'
 import Quantity from './Quantity'
 import AddCartButton from './AddCartButton'
+import UpdateCartButton from './UpdateCartButton'
 import {Modal, Button} from 'react-bootstrap'
+
 
 const CustomizeItemModal = ({handleClose, item}) => {
 
     if (!item) return null;
     console.log(item)
+// add
+//  {
+//         menuitem: {
+            // _id: menuitem.id,
+            // title: menuitem.title,
+            // price: mnenuite,.price
+            // },
+//         sugar: menuitem.sugar,
+//         temperature: menuitem.temperature,
+//         sizeId: menuitem.sizeId,
+//         milkId: menuitem.milkId
+        
+//       }
+// update
 
-    // const [menuitem, setMenuitem] = useState(item.menuitem)
+    
+
     const [temperature, setTemperature] = useState(item.temperature ) 
-    const [size, setSize] =useState(item.size)
-    const [milk, setMilk] = useState(item.milk)
+    const [sizeId, setSizeId] =useState(item.sizeId)
+    const [milkId, setMilkId] = useState(item.milkId)
     const [sugar, setSugar] = useState(item.sugar)
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(item.quantity || 1)
 
     
     return(
@@ -26,33 +43,43 @@ const CustomizeItemModal = ({handleClose, item}) => {
             <Modal show={true} onHide={handleClose} size="lg"  >
             
                 <Modal.Header className='customize_header' closeButton>
-                    <Modal.Title>Customize {item.title} </Modal.Title>
+                    <Modal.Title>Customize {item.menuitem.title} </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body className='customize_list'>
                     <CustomizeTemperature temperature={temperature} setTemperature={setTemperature} />
-                    <CustomizeSize size={size} setSize={setSize} />
-                    <CustomizeMilk milk={milk} setMilk={setMilk} />
+                    <CustomizeSize sizeId={sizeId} setSizeId={setSizeId} />
+                    <CustomizeMilk milkId={milkId} setMilkId={setMilkId} />
                     <CustomizeSugar sugar={sugar} setSugar={setSugar} />
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Quantity quantity={quantity} setQuantity={setQuantity} />
-                    <AddCartButton 
-                        handleClose={handleClose} 
-                        item={{
-                            menuitem: {
-                                _id: item._id,
-                                price: item.price
-                            },
-
-                            temperature: temperature,
-                            size: size,
-                            milk: milk,
-                            sugar: sugar,
-                            quantity: quantity
-                        }} />
-
+                    { item.cartId ? 
+                        <UpdateCartButton 
+                            handleClose={handleClose} 
+                            item = {{
+                                cartId: item.cartId,
+                                menuitem: item.menuitem,
+                                temperature: temperature,
+                                sizeId: sizeId,
+                                milkId: milkId,
+                                sugar: sugar,
+                                quantity: quantity
+                            }}
+                        />
+                        :
+                        <AddCartButton 
+                            handleClose={handleClose} 
+                            item = {{
+                                menuitem: item.menuitem,
+                                temperature: temperature,
+                                sizeId: sizeId,
+                                milkId: milkId,
+                                sugar: sugar,
+                                quantity: quantity
+                            }} />
+                        }
                             
             
                 </Modal.Footer> 

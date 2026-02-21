@@ -50,6 +50,8 @@ export const CartProvider = ({ children }) => {
         console.log(item)
         setLoading(true)
         try {
+            await new Promise((resolve)=>setTimeout(resolve, 2000))
+            
             const response = await fetch(`${backendApi}/api/v1/carts`, {
                 'method': "POST",
                 'headers': {
@@ -77,15 +79,45 @@ export const CartProvider = ({ children }) => {
             setLoading(false)
         }
     }
-    // const updateCart = async () => {
-        
-    // }
+    const updateCart = async (cart) => {
+        console.log("update cart")
+        console.log(cart);
+        setLoading(true)
+
+        try {
+            await new Promise((resolve)=>setTimeout(resolve, 2000))
+                
+            const response = await fetch(`${backendApi}/api/v1/carts/${cart.cartId}`, {
+                'method': 'PATCH',
+                'headers': {
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                },
+                'body': JSON.stringify(cart)
+            })
+
+
+            const data = await response.json();
+            if(!response.ok) {
+                throw new Error(data.msg || "Failed to update cart item")
+            }
+            await getCarts()   
+
+        } catch (error) {
+            console.error(error.message)
+            showAlert(error.message, 'danger')
+        }
+        finally {
+            setLoading(false)
+        }
+    }
     const deleteCart = async(cartId) => {
         console.log("delete cart")
         setLoading(true)
-        
+
         try {
-            await new Promise((resolve)=>setTimeout(resolve, 3000))
+            await new Promise((resolve)=>setTimeout(resolve, 2000))
                 
             const response = await fetch(`${backendApi}/api/v1/carts/${cartId}`, {
                 'method': 'DELETE',
@@ -99,8 +131,6 @@ export const CartProvider = ({ children }) => {
                 throw new Error(data.msg || "Failed to delete cart item")
             }
             await getCarts()
-            // setShow(true)
-
             
         } catch (error) {
             console.error(error.message)
@@ -133,7 +163,7 @@ export const CartProvider = ({ children }) => {
                 show, setShow, 
                 addCart,
                 deleteCart, 
-                // updateCart,
+                updateCart,
                 loading 
         }}>
             {children}

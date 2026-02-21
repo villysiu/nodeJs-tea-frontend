@@ -45,7 +45,7 @@ const CartOffcanvas = () => {
             <Offcanvas.Body>
             {   
                 carts.map(cart => {
-                    return <CartItem cart={cart} />
+                    return <CartItem key={cart._id} cart={cart} />
                 })
             }
             </Offcanvas.Body>
