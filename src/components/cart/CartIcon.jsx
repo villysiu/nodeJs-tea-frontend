@@ -7,9 +7,9 @@ import { useCart } from '../context/CartContext'
 
 const CartIcon = () => {
     
-    const { setShow, loading } = useCart();
+    const { show, setShow, loading } = useCart();
 
-    if(loading){
+    if(!show && loading){
         return (
             <Nav.Link>
                 <Spinner animation="border"

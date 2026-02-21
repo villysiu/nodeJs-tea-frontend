@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import CartItem from './CartItem'
-import { Offcanvas, Button } from 'react-bootstrap'
+import { Offcanvas, Button, Spinner } from 'react-bootstrap'
 import { useCart } from '../context/CartContext'
 
 
@@ -11,7 +11,7 @@ const CartOffcanvas = () => {
 
     console.log(show)
 
-
+    console.log("loading: ", loading)
     return (
         <Offcanvas  show={show} onHide={() => setShow(false)} 
                     placement="end"
@@ -22,7 +22,6 @@ const CartOffcanvas = () => {
                         height: 'auto', 
                         borderRadius: '12px',
                         boxShadow:'0 10px 30px rgba(0,0,0,0.3)',
-                        // position: 'relative' 
                     }} 
         >
             {loading && (

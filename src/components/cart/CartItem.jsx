@@ -38,7 +38,7 @@ const CartItem = ({ cart }) => {
                     // onBlur={e=>validateName(e.target.value)}
                 />
                 <CartEditIcon cart={cart} />
-                <CartDeleteIcon itemId={cart._id} />
+                <CartDeleteIcon cartId={cart._id} />
                 
             </Col>
         </Row>
