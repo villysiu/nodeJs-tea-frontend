@@ -43,7 +43,6 @@ const CustomizeItemModal = ({handleClose, item}) => {
                         item={{
                             menuitem: {
                                 _id: item._id,
-                                title: item.title,
                                 price: item.price
                             },
 

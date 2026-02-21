@@ -27,7 +27,7 @@ function MenuItem() {
   }
   return (
     <>
-    { selectedItem && <CustomizeItemModal handleClose={handleClose} item = {selectedItem} />}
+    { selectedItem && <CustomizeItemModal handleClose={handleClose} item={selectedItem} />}
     <Container className="mt-5">
       <h1>Menu Items</h1>
       <Row>
