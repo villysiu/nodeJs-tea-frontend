@@ -1,7 +1,7 @@
 import { useMenu } from "../context/MenuContext";
 import { Form } from 'react-bootstrap'
 
-const CustomizeSize = ({size, setSize}) => {
+const CustomizeSize = ({sizeId, setSizeId}) => {
     const { sizes } = useMenu();
     console.log(sizes)
     return (
@@ -19,10 +19,10 @@ const CustomizeSize = ({size, setSize}) => {
                         <Form.Check 
                             key={sz._id}
                             className='customize_item_choice'
-                            onChange={()=>setSize(sz)}
+                            onChange={()=>setSizeId(sz._id)}
                             inline
                             type="radio"
-                            defaultChecked = {size!==null && sz._id===size._id}
+                            defaultChecked = {sizeId!==null && sz._id===sizeId}
                             name="size"
                             label={labelText}
                             id={`size-radio-${sz._id}`}

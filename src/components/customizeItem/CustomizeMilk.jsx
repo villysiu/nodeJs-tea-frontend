@@ -1,11 +1,12 @@
 import { useMenu } from "../context/MenuContext";
 import { Form } from 'react-bootstrap'
 
-const CustomizeMilk = ({milk, setMilk}) => {
+const CustomizeMilk = ({milkId, setMilkId}) => {
     const { milks } = useMenu();
 
     console.log(milks)
-    if(milk.title === 'NA')
+    
+    if(milkId === milks.find(m=>m.title === 'NA')._id)
         return null
 
     return (
@@ -26,10 +27,10 @@ const CustomizeMilk = ({milk, setMilk}) => {
                         
                         <Form.Check key={mk._id}
                             // className='customize_item_choice'
-                            onChange={()=>setMilk(mk)}
+                            onChange={()=>setMilkId(mk._id)}
                             inline
                             type="radio"
-                            defaultChecked = {milk._id===mk._id}
+                            defaultChecked = {milkId===mk._id}
                             name="milk"
                             label={mkTitle}
                             id={`milk-radio-${mk._id}`}

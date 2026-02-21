@@ -3,15 +3,20 @@ import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import {useAuth} from '../context/AuthContext'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useMenu } from '../context/MenuContext'
 
 const AddCartButton = ({item, handleClose}) => {
     console.log(item)
     const { user } = useAuth();
     const { addCart, loading } = useCart();
+    const { sizes, milks } = useMenu();
     const navigate = useNavigate();
     const location = useLocation();
 
     const [price, setPrice]= useState(0)
+
+    const milk = milks.find(m=>m._id === item.milkId);
+    const size = sizes.find(s=>s._id === item.sizeId);
 
     const handleClick = () => {
         console.log("adding item")
@@ -21,8 +26,8 @@ const AddCartButton = ({item, handleClose}) => {
        }
        addCart({
             menuitemId: item.menuitem._id,
-            milkId: item.milk._id,
-            sizeId: item.size._id,
+            milkId: item.milkId,
+            sizeId: item.sizeId,
             sugar: item.sugar,
             temperature: item.temperature,
             quantity: item.quantity,
@@ -31,7 +36,7 @@ const AddCartButton = ({item, handleClose}) => {
        handleClose();
     }
     useEffect(()=>{
-        setPrice(item.quantity * (item.menuitem.price + item.size.price+ item.milk.price));
+        setPrice(item.quantity * (item.menuitem.price + size.price+ milk.price));
     }, [item])
 
     return (

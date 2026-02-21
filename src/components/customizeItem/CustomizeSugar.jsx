@@ -1,7 +1,7 @@
 import { useMenu } from "../context/MenuContext";
 import { Form } from 'react-bootstrap'
 
-const CustomizeSugar = ({sugar, setSuga}) => {
+const CustomizeSugar = ({sugar, setSugar}) => {
     const { sugars } = useMenu();
 
     if(sugar === "NA")

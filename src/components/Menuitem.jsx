@@ -13,13 +13,16 @@ function MenuItem() {
     
     setSelectedItem(
       {
-        _id: menuitem._id,
-        title: menuitem.title,
+        menuitem: {
+          _id: menuitem._id,
+          title: menuitem.title,
+          price: menuitem.price
+        },
         sugar: menuitem.sugar,
         temperature: menuitem.temperature,
-        size: sizes.find(s => s.title === '8oz'), // default dded
-        milk: milks.find(m => m._id === menuitem.milk),
-        price: menuitem.price
+        sizeId: menuitem.sizeId,
+        milkId: menuitem.milkId
+        
       })
   }
   const handleClose = () =>{
@@ -27,7 +30,7 @@ function MenuItem() {
   }
   return (
     <>
-    { selectedItem && <CustomizeItemModal handleClose={handleClose} item={selectedItem} />}
+    <CustomizeItemModal handleClose={handleClose} item={selectedItem} />
     <Container className="mt-5">
       <h1>Menu Items</h1>
       <Row>
