@@ -2,7 +2,10 @@ import { Navbar, Nav, Container, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import UserIcon from '../user/UserIcon'
 import CartIcon from '../cart/CartIcon'
+import {useAuth} from '../context/AuthContext'
+
 const NavigationBar = () => {
+  const { user, loading } = useAuth();
   return (
     <Navbar bg="light" variant="light">
       <Container>
@@ -16,8 +19,8 @@ const NavigationBar = () => {
        
         <Nav>
           <UserIcon />
-          <CartIcon />
-          {/* <Nav.Link>User</Nav.Link> */}
+          { user && !loading && <CartIcon />}
+          
           
         </Nav>
       </Container>
