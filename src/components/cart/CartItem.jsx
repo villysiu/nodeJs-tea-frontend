@@ -47,9 +47,13 @@ const CartItem = ({ cart }) => {
             <Col>
                 <b>{menuitem.title}</b>
                 <div style={{fontSize: '12px'}}>
-                    {milk.title} | {size.title} | {cart.sugar} | {cart.temperature}
+                    {size.title} 
+                    { milk.title !== 'NA' &&  <> | {milk.title}</>}
+                    { cart.sugar !== 'NA' &&  <> | {cart.sugar}</>}
+                    { cart.temperature !== 'NA' &&  <> | {cart.temperature}</>}
+            
                 </div>
-                <div>${cart.unitPrice.toFixed(2)}</div>
+                <div>@${cart.unitPrice.toFixed(2)}</div>
             </Col>
             <Col xs={3} className="d-flex align-items-center gap-2 px-0">
                 <Form.Control type="text" 
@@ -58,6 +62,7 @@ const CartItem = ({ cart }) => {
                     // onChange={handleChange}
                     // onBlur={e=>validateName(e.target.value)}
                 />
+                <EditQuantityInput 
                 <CartEditIcon cart={{...cart,
                                         menuitem: {
                                             _id: menuitem._id,
