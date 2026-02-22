@@ -100,7 +100,7 @@ export const OrderProvider = ({ children }) => {
             
             await getOrders()
             await getCarts()
-
+            showAlert("Order placed", 'success')
 
         } catch (error) {
             console.error(error);

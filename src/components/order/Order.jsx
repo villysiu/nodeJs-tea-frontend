@@ -12,7 +12,6 @@ const Order = ({order}) => {
     const date = new Date(order.createdAt)
     const formattedDate = date.toLocaleDateString('en-US')
 
-    console.log(order)
     const handleClick = (orderId) => {
         if(orderId === show) return;
 

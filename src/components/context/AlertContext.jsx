@@ -6,6 +6,7 @@ const AlertContext = createContext();
 
 export const AlertProvider = ({ children }) => {
     const [alerts, setAlerts] = useState([]);
+    const [cartAlert, setCartAlert] = useState(null);
 
     const showAlert = (message, variant='danger') => {
         const id = Date.now();
@@ -17,11 +18,18 @@ export const AlertProvider = ({ children }) => {
             const updatedAlerts = [...currentAlerts, {id, message, variant}];
             setTimeout(()=>{
                 setAlerts(arr=>arr.filter(item => item.id !== id));
-            }, 60000);
+            }, 10000);
 
             return updatedAlerts;
         })
     }
+    const createCartAlert = (message, variant = 'danger') => {
+        setCartAlert({ message, variant });
+
+        setTimeout(() => {
+            setCartAlert(null);
+        }, 5000);
+    };
         
         
 
@@ -30,7 +38,7 @@ export const AlertProvider = ({ children }) => {
     }
 
     return (
-        <AlertContext.Provider value={{ alerts, showAlert, removeAlert }} >
+        <AlertContext.Provider value={{ alerts, showAlert, removeAlert, cartAlert, createCartAlert }} >
             { children }
         </AlertContext.Provider>
     )
