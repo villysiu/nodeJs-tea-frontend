@@ -35,34 +35,26 @@ const Login = () => {
 
 
     return(
-        <>
+        <Form style={{ width: '100%'}}>
             <Modal.Header closeButton>
                 <Modal.Title>Sign in to your account</Modal.Title>
             </Modal.Header>
 
             <Modal.Body >
-                <Form style={{ width: '100%'}}>
-
-                    <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
-                    <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
-                    
-
-                </Form>
-                {/* <div>Forgot your password?</div> */}
+                <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+                <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
             </Modal.Body>
             <Modal.Footer className="d-flex justify-content-between align-items-center">
-                
                 <Link onClick={()=>setShow('signup')} >
                     Create an account
-
                 </Link>
                 <Button type="submit" onClick={handleSubmit}  disabled={ emailError!=="" || passwordError!=="" || email==="" || password==="" }>
-                        Sign In
-                    </Button>
+                    Sign In
+                </Button>
             
             </Modal.Footer>
 
-        </>
+        </Form>
 
 
     )

@@ -37,20 +37,16 @@ const Signup = () => {
     }
     
     return(
-        <>
+        <Form onSubmit={handleSubmit} style={{ width: '100%'}}>
             <Modal.Header closeButton>
                 <Modal.Title>Sign up a new account</Modal.Title>
             </Modal.Header>
 
             <Modal.Body >
-
-                <Form onSubmit={handleSubmit} style={{ width: '100%'}}>
-                    <NameInput name={name} setName={setName} nameError={nameError} setNameError={setNameError}/>
-                    <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
-                    <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
-                    
-
-                </Form>
+                <NameInput name={name} setName={setName} nameError={nameError} setNameError={setNameError}/>
+                <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+                <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
+            
                 
             </Modal.Body>
             <Modal.Footer className="d-flex justify-content-between align-items-center">
@@ -72,9 +68,7 @@ const Signup = () => {
                        Sign Up
                     </Button>
             </Modal.Footer>
-        </>
-
-
+        </Form>
     )
 }
 export default Signup
