@@ -7,37 +7,51 @@ import { useMenu } from '../context/MenuContext'
 
 const AddCartButton = ({item, handleClose}) => {
     console.log(item)
-    const { user } = useAuth();
-    const { addCart, loading } = useCart();
+    const { user, setShow } = useAuth();
+    const { addCart, loading, setPendingItem } = useCart();
     const { sizes, milks } = useMenu();
     const navigate = useNavigate();
     const location = useLocation();
 
     const [price, setPrice]= useState(0)
-
+    
     const milk = milks.find(m=>m._id === item.milkId);
     const size = sizes.find(s=>s._id === item.sizeId);
 
     const handleClick = () => {
         console.log("adding item")
-       // habdle no user login
-       if(user === null){
-            return;
-       }
-       addCart({
+        const selectedItem = {
             menuitemId: item.menuitem._id,
             milkId: item.milkId,
             sizeId: item.sizeId,
             sugar: item.sugar,
             temperature: item.temperature,
             quantity: item.quantity,
-       });
-
+       }
+       
+       // habdle no user login
+       if(user === null){
+            setPendingItem(selectedItem)
+            
+            setShow('login')
+            handleClose();
+            return;
+       }
+       addCart(selectedItem);
        handleClose();
+
+
     }
     useEffect(()=>{
         setPrice(item.quantity * (item.menuitem.price + size.price+ milk.price));
-    }, [item])
+    }, [item, size.price, milk.price])
+
+    // useEffect(()=> {
+    //     if(user && pendingItem){
+    //         addCart(pendingItem)
+    //         setPendingItem(null)
+    //     }
+    // },[user, pendingItem, addCart, handleClose]);
 
     return (
         <Button

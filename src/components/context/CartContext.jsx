@@ -12,13 +12,13 @@ export const CartProvider = ({ children }) => {
     const { showAlert } = useAlert();
     const [carts, setCarts] = useState([])
     const [subtotal, setSubtotal] = useState(0)
-    const [loading, setLoading] = useState(true)
-    const [show, setShow] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [show, setShow] = useState(false) //control cart offcanvas
+    const [ pendingItem, setPendingItem ] = useState(null)
 
-    console.log(carts)
     const getCarts = async () => {
         setLoading(true)
-        // setFetchCartsStatus('loading')
+
         try {
             const response = await fetch(`${backendApi}/api/v1/carts`, {
                 'method': "GET",
@@ -153,18 +153,28 @@ export const CartProvider = ({ children }) => {
         getCarts();
     }, [user])
 
+    useEffect(()=>{
+        if(user && pendingItem){
+            addCart(pendingItem)
+            setPendingItem(null)
+        }
+    }, [user, pendingItem])
+
     
 
     return (
         <CartContext.Provider 
             value={{ 
                 carts, 
+                getCarts,
                 subtotal, 
                 show, setShow, 
                 addCart,
                 deleteCart, 
                 updateCart,
-                loading 
+                loading,
+                setPendingItem
+
         }}>
             {children}
         </CartContext.Provider> 
