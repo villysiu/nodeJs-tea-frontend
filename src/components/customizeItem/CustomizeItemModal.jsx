@@ -14,22 +14,6 @@ const CustomizeItemModal = ({handleClose, item}) => {
 
     if (!item) return null;
     console.log(item)
-// add
-//  {
-//         menuitem: {
-            // _id: menuitem.id,
-            // title: menuitem.title,
-            // price: mnenuite,.price
-            // },
-//         sugar: menuitem.sugar,
-//         temperature: menuitem.temperature,
-//         sizeId: menuitem.sizeId,
-//         milkId: menuitem.milkId
-        
-//       }
-// update
-
-    
 
     const [temperature, setTemperature] = useState(item.temperature ) 
     const [sizeId, setSizeId] =useState(item.sizeId)
@@ -39,7 +23,6 @@ const CustomizeItemModal = ({handleClose, item}) => {
 
     
     return(
-       
             <Modal show={true} onHide={handleClose} size="lg"  >
             
                 <Modal.Header closeButton>

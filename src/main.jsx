@@ -8,6 +8,8 @@ import { MenuProvider } from './components/context/MenuContext'
 import { AuthProvider } from './components/context/AuthContext'
 import { AlertProvider } from './components/context/AlertContext'
 import { CartProvider } from './components/context/CartContext'
+import { OrderProvider } from './components/context/OrderContext'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -15,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <CartProvider>
           <MenuProvider>
-            <App />
+            <OrderProvider>
+              <App />
+            </OrderProvider>
           </MenuProvider>
         </CartProvider>
       </AuthProvider>

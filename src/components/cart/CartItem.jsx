@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Row, Col, Image, Spinner, Form } from 'react-bootstrap'
 import CartEditIcon from './CartEditIcon'
 import CartDeleteIcon from './CartDeleteIcon'
+import EditQuantityInput from './EditQuantityInput'
 import { useMenu } from '../context/MenuContext'
 
 const CartItem = ({ cart }) => {
@@ -56,13 +57,9 @@ const CartItem = ({ cart }) => {
                 <div>@${cart.unitPrice.toFixed(2)}</div>
             </Col>
             <Col xs={3} className="d-flex align-items-center gap-2 px-0">
-                <Form.Control type="text" 
-                    placeholder="hhh" 
-                    value={cart.quantity}
-                    // onChange={handleChange}
-                    // onBlur={e=>validateName(e.target.value)}
-                />
-                <EditQuantityInput 
+                
+                {/* <EditQuantityInput cart={cart} /> */}
+                qty: {cart.quantity}
                 <CartEditIcon cart={{...cart,
                                         menuitem: {
                                             _id: menuitem._id,
