@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react'
 import CartItem from './CartItem'
 import { Offcanvas, Button, Spinner } from 'react-bootstrap'
 import { useCart } from '../context/CartContext'
-
+import CheckoutButton from './CheckoutButton'
+import { Cart } from 'react-bootstrap-icons'
+import { Link } from 'react-router-dom'; 
 
 const CartOffcanvas = () => {
     
 
     const { carts, subtotal, show, setShow, loading } = useCart();
 
-    console.log(show)
+    console.log( carts)
 
-    console.log("loading: ", loading)
     return (
         <Offcanvas  show={show} onHide={() => setShow(false)} 
                     placement="end"
@@ -24,38 +25,29 @@ const CartOffcanvas = () => {
                         boxShadow:'0 10px 30px rgba(0,0,0,0.3)',
                     }} 
         >
-            {loading && (
-                <div style={{   position: "absolute",
-                                inset: 0,
-                                backgroundColor: "rgba(0, 0, 0, 0.4)",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                zIndex: 10,
-                            }}
-                >
-                    <Spinner animation="border" variant="light" />
-                </div>
-            )}
+
 
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Your Cart ({carts.length} items)</Offcanvas.Title>
             </Offcanvas.Header>
 
-            <Offcanvas.Body>
-            {   
-                carts.map(cart => {
-                    return <CartItem key={cart._id} cart={cart} />
-                })
-            }
-            </Offcanvas.Body>
+            { carts.length > 0 ? 
+            <>
+                <Offcanvas.Body>
+                {  carts.map(cart => <CartItem key={cart._id} cart={cart} />) }
+                </Offcanvas.Body>
+                
+                <div className="border-top p-3">
+                    Subtotal: ${subtotal.toFixed(2)}
+                    <CheckoutButton />
+                </div>
+            </> 
+            :
+                <Offcanvas.Body className="d-flex justify-content-center align-items-center">
+                    <Link to="/menu" onClick={()=>setShow(false)}>Start Shopping  <Cart size={22}/></Link>
+                </Offcanvas.Body>
             
-            <div className="border-top p-3">
-                Subtotal: ${subtotal.toFixed(2)}
-                <Button variant="primary" className="w-100">
-                    Checkout
-                </Button>
-            </div>
+            }
         </Offcanvas>
     )
 }
