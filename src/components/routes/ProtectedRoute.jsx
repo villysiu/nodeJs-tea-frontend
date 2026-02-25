@@ -4,20 +4,21 @@ import { useAuth } from '../context/AuthContext'
 import { useAlert } from '../context/AlertContext'
 
 const ProtectedRoute = ({children}) => {
-    const { user, loading, setShow } = useAuth();
+    const { user, loading } = useAuth();
     const { showAlert } = useAlert();
     const location = useLocation();
 
-    useEffect(() => {
+
         if(loading)
             return;
         if (!user) {
-            setShow('login')
-            showAlert("Authentication required", "warning");
+            
+            showAlert("Authentication required. Return to homepage", "warning");
+            return <Navigate to="/" state={{ from: location }} replace />;
+            
+            
         }
-    }, [user, showAlert, loading]); 
 
-    if(!user) return;
 
     return children
 }

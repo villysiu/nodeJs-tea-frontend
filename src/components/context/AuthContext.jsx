@@ -134,6 +134,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(true);
         console.log(userData)
         try {
+            await new Promise((resolve)=>setTimeout(resolve, 10000))
             const response = await fetch(`${backendApi}/api/v1/auth/update`, {
                 'method': 'PATCH',
                 'headers': {
@@ -150,13 +151,14 @@ export const AuthProvider = ({ children }) => {
                 throw new Error(data.message || "Failed to update user")
             }
             setUser(data.user);
-            showAlert("User name updated", "success");
-
+            showAlert("User credential updated", "success");
+            return true
    
         } 
         catch (error) {
             console.error(error);
             showAlert(error.message)
+            return false
         }
         finally {
             setLoading(false);

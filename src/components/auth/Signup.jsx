@@ -12,7 +12,7 @@ const Signup = () => {
 
     const { register, show, setShow } = useAuth();
 
-
+console.log(show)
     const [name, setName] = useState('')
     const [nameError, setNameError] = useState('')
     const [email, setEmail] = useState("")
@@ -43,10 +43,15 @@ const Signup = () => {
             </Modal.Header>
 
             <Modal.Body >
+                <Form.Label><b>User Name</b></Form.Label>
                 <NameInput name={name} setName={setName} nameError={nameError} setNameError={setNameError}/>
+                <div className='my-3'></div>
+                <Form.Label><b>Email</b></Form.Label>
                 <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+                <div className='my-3'></div>
+                <Form.Label><b>Password</b></Form.Label>
                 <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
-            
+         
                 
             </Modal.Body>
             <Modal.Footer className="d-flex justify-content-between align-items-center">

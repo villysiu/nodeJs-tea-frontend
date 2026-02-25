@@ -26,16 +26,14 @@ const EmailInput = ({email, setEmail, emailError, setEmailError}) => {
     }
     return (
         <>
-            <FloatingLabel controlId="floatingEmailInput" label="Email" className={emailError? "" : "mb-3"}
-            >
-                <Form.Control type="email"
-                              placeholder="Email"
-                              value={email}
-                      onChange={handleChange}
-                      onBlur={e=>validateEmail(e.target.value)}
-                    //   style={{width: '640px'}}
-                />
-            </FloatingLabel>
+            
+            <Form.Control type="email"
+                            placeholder="Email"
+                            value={email}
+                    onChange={handleChange}
+                    onBlur={e=>validateEmail(e.target.value)}
+            />
+            
             {emailError && <p className="text-danger">{emailError}.</p>}
         </>
 

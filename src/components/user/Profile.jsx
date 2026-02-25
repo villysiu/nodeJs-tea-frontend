@@ -2,15 +2,11 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext'
 import { Container, Row, Col } from 'react-bootstrap'
 import EditName from './EditName'
+import EditPassword from './EditPassword'
 const Profile = () => {
     const { user } = useAuth();
 
     console.log(user)
-    
-
-
-    
-    
 
     return ( 
         <Container>
@@ -26,13 +22,9 @@ const Profile = () => {
                     </Row>
 
                     <EditName />
+                    <EditPassword />
+                
                     
-                    <Row>
-                        {/* <Col xs={12} className='text-start'> */}
-                        Change password 
-                        {/* </Col> */}
-                        
-                    </Row>
                 </Col>
             </Row>
         </Container>

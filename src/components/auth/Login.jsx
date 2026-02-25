@@ -8,7 +8,6 @@ import PasswordInput from "./PasswordInput";
 
 
 const Login = () => {
-
     const { login, show, setShow } = useAuth();
 
 
@@ -41,8 +40,12 @@ const Login = () => {
             </Modal.Header>
 
             <Modal.Body >
+                <Form.Label><b>Email</b></Form.Label>
                 <EmailInput email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+                <div className='my-3'></div>
+                <Form.Label><b>Password</b></Form.Label>
                 <PasswordInput password={password} setPassword={setPassword} passwordError={passwordError} setPasswordError={setPasswordError} />
+   
             </Modal.Body>
             <Modal.Footer className="d-flex justify-content-between align-items-center">
                 <Link onClick={()=>setShow('signup')} >

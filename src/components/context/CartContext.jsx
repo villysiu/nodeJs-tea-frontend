@@ -61,8 +61,9 @@ export const CartProvider = ({ children }) => {
                 'body': JSON.stringify(item)
             })
             const data = await response.json()
+            console.log(data)
             if(!response.ok) {
-                throw new Error(data.msg || "Failed to add item");
+                throw new Error(data.message || "Failed to add item");
             }
             console.log('new item added:', data.cart);
             

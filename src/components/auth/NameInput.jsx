@@ -20,16 +20,14 @@ const NameInput = ({name, setName, nameError, setNameError}) => {
     }
     return (
         <>
-        <FloatingLabel controlId="floatingName" label="Name" className="mb-3">
             <Form.Control type="text" 
                           placeholder="Name" 
                           value={name}
                           onChange={handleChange}
                           onBlur={e=>validateName(e.target.value)}
             />
-        </FloatingLabel>
-    {nameError && <p className="text-danger">{nameError}.</p>}
-    </>
+            {nameError && <p className="text-danger">{nameError}.</p>}
+        </>
     )
 }
 export default NameInput

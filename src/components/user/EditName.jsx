@@ -15,10 +15,12 @@ const EditName = () =>{
         showEdit(true)
     };
 
-    const handleSave = () =>{
+    const handleSave = async (e) =>{
+        e.preventDefault();
         console.log(name)
-        updateCredential({'name': name});
-        showEdit(false);
+        const success = await updateCredential({'name': name});
+        if(success)
+            showEdit(false);
     }
 
     if(!edit) {
@@ -36,26 +38,24 @@ const EditName = () =>{
          
     }
     return (
-        <Form className="p-3 mb-3 text-start border-bottom border-1" >
-            {/* <Form.Label ><b>Name</b></Form.Label> */}
-            
-            <Col xs={12} md={6}>
+        <Col xs={12} md={6}>
+            <Form className="p-3 mb-3 text-start border-bottom border-1" >
+                <Form.Label ><b>Name</b></Form.Label>
                 <NameInput name={name} setName={setName} nameError={nameError} setNameError={setNameError}/>
-
-            </Col>
-            <Button onClick={handleSave}
-                    type="submit" 
-                    disabled={ 
-                                name==="" || 
-                                nameError!=="" ||
-                                name === user.name
-                            }
-            >
-                Save
-            </Button>
-            <Button className='ms-3' onClick={()=>showEdit(false)}> Cancel</Button>
-
-         </Form>
+                <div className='my-3'></div>
+                <Button onClick={handleSave}
+                        type="submit" 
+                        disabled={ 
+                                    name==="" || 
+                                    nameError!=="" ||
+                                    name === user.name
+                                }
+                >
+                    Save
+                </Button>
+                <Button className='ms-3' onClick={()=>showEdit(false)}> Cancel</Button>
+            </Form>
+         </Col>
     )
     
 }

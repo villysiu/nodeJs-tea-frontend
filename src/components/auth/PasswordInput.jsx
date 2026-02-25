@@ -25,14 +25,11 @@ const PasswordInput = ({password, setPassword, passwordError, setPasswordError})
     }
     return (
         <>
+        
         <div style={{ position: 'relative'}}>
-            <FloatingLabel controlId="floatingPasswordInput" label="Password"
-                className="flex-grow-1"
-
-            >
-                
+            
                 <Form.Control type={showPassword ? "text" : "password"}
-                              placeholder=""
+                              placeholder="Password"
                             maxLength={20}
                               value={password}
                               onChange={handleChange}
@@ -49,8 +46,7 @@ const PasswordInput = ({password, setPassword, passwordError, setPasswordError})
                 >
                     {showPassword ? <EyeSlash /> : <Eye />}
                 </InputGroup.Text>
-              
-            </FloatingLabel>
+
         </div>
 
             {passwordError && <p className="text-danger">{passwordError}.</p>}
